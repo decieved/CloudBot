@@ -146,10 +146,10 @@ def factoid(match, chan, event, message, action):
     split = match.group(1).strip().split(" ")
     factoid_id = split[0].lower()
 
-    if len(split) >= 1:
-        arguments = " ".join(split[1:])
+    if len(split) > 1:
+        arguments = split[1:]
     else:
-        arguments = ""
+        arguments = None
 
     if factoid_id in factoid_cache[chan]:
         data = factoid_cache[chan][factoid_id]
@@ -160,8 +160,12 @@ def factoid(match, chan, event, message, action):
 
         if result.startswith("<act>"):
             result = result[5:].strip()
+            if arguments:
+                result = "{} to/for {}".format(result, arguments[0])
             action(result)
         else:
+            if arguments:
+                result = "{}: {}".format(arguments[0], result)
             message(result)
 
 
