@@ -23,13 +23,15 @@ def urban(text):
         # clean and split the input
         text = text.lower().strip()
         parts = text.split()
-
-        # if the last word is a number, set the ID to that number
-        if parts[-1].isdigit():
-            id_num = int(parts[-1])
-            # remove the ID from the input string
-            del parts[-1]
-            text = " ".join(parts)
+        
+        # Check if there's enough parts to parse the ID
+        if (len(parts) > 1):
+            # if the last word is a number, set the ID to that number
+            if parts[-1].isdigit():
+                id_num = int(parts[-1])
+                # remove the ID from the input string
+                del parts[-1]
+                text = " ".join(parts)
         else:
             id_num = 1
 
