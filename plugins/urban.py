@@ -32,6 +32,8 @@ def urban(text):
                 # remove the ID from the input string
                 del parts[-1]
                 text = " ".join(parts)
+            else:
+                id_num = 1
         else:
             id_num = 1
 
